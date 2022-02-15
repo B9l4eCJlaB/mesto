@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="vendor/normalize.css">
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
 </head>
@@ -29,48 +28,48 @@
             <button class="profile__add-button"><img src="images/add-button.png" alt="значок плюса"></button>
         </section>
         <section class="elements">
-            <div class="element">
+            <article class="elements__item element">
                 <img class="element__image" src="images/Karachaevsk.jpg" alt="Карачаевск">
                 <div class="element__info">
                     <h2 class="element__name">Карачаевск</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
-            <div class="element">
+            </article>
+            <article class="elements__item element">
                 <img class="element__image" src="images/Elbrus.jpg" alt="Эльбрус">
                 <div class="element__info">
                     <h2 class="element__name">Гора Эльбрус</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
-            <div class="element">
+            </article>
+            <article class="elements__item element">
                 <img class="element__image" src="images/Dombay.jpg" alt="Домбай">
                 <div class="element__info">
                     <h2 class="element__name">Домбай</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
-            <div class="element">
+            </article>
+            <article class="elements__item element">
                 <img class="element__image" src="images/Elbrus.jpg" alt="Эльбрус">
                 <div class="element__info">
                     <h2 class="element__name">Гора Эльбрус</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
-            <div class="element">
+            </article>
+            <article class="elements__item element">
                 <img class="element__image" src="images/Dombay.jpg" alt="Домбай">
                 <div class="element__info">
                     <h2 class="element__name">Домбай</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
-            <div class="element">
+            </article>
+            <article class="elements__item element">
                 <img class="element__image" src="images/Karachaevsk.jpg" alt="Карачаево-Черкесcия">
                 <div class="element__info">
                     <h2 class="element__name">Карачаево-Черкесcия</h2>
                     <button class="element__like"></button>
                 </div>
-            </div>
+            </article>
         </section>
     </main>
     <footer class="footer">
@@ -79,17 +78,14 @@
     <section class="popup">
         <div class="popup__main-container">
             <button class="popup__close"></button>
-            <div class="popup__form-container">
-                <form class="popup__form" action="#">
-                    <h2 class="popup__heading">Редактировать профиль</h2>
-                    <fieldset class="popup__input-container">
-                        <input class="popup__input popup__input-name" type="text" placeholder="Жак-Ив Кусто">
-                        <input class="popup__input popup__input-description" type="text"
-                            placeholder="Исследователь океана">
-                        <button class="popup__button" type="submit">Сохранить</button>
-                    </fieldset>
-                </form>
-            </div>
+            <form class="popup__form" name="form" action="#">
+                <h2 class="popup__heading">Редактировать профиль</h2>
+                <fieldset class="popup__input-container">
+                    <input class="popup__input popup__input_name" type="text" placeholder="Введите имя">
+                    <input class="popup__input popup__input_description" type="text" placeholder="Введите профессию">
+                    <button class="popup__submit-button" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
         </div>
     </section>
     <script src="scripts/index.js"></script>

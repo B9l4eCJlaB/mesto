@@ -6,22 +6,21 @@ const popup = document.querySelector('.popup');
 const closeButton = popup.querySelector('.popup__close');
 const formElem = popup.querySelector('.popup__form');
 
-const inputName = formElem.querySelector('.popup__input-name');
-const inputJob = formElem.querySelector('.popup__input-description');
+const inputName = formElem.querySelector('.popup__input_name');
+const inputJob = formElem.querySelector('.popup__input_description');
 
 
 const closePopup = () => {
     popup.classList.remove('popup_opened');
-    inputJob.value = ''
-    inputName.value = '';
 }
 const openPopup = () => {
     popup.classList.add('popup_opened');
+    inputName.value = authorName.textContent;
+    inputJob.value = description.textContent;
 }
 
-const formSubmitHandler = (event) => {
+const handleProfileFormSubmit = (event) => {
     event.preventDefault();
-
     authorName.textContent = inputName.value;
     description.textContent = inputJob.value;
 
@@ -37,7 +36,7 @@ const closePopupByClickOnOverlay = (event) => {
     }
 }
 
-formElem.addEventListener('submit', formSubmitHandler);
+formElem.addEventListener('submit', handleProfileFormSubmit);
 editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
 popup.addEventListener('click', closePopupByClickOnOverlay);
