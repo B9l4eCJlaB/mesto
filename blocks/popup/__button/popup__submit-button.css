@@ -15,12 +15,12 @@
     cursor: pointer;
     transition: opacity .4s ease;
 }
-.popup__button:hover {
+.popup__submit-button:hover {
     opacity: .8;
 }
 
 @media screen and (max-width: 560px) {
-    .popup__button {
+    .popup__submit-button {
         font-size: 14px;
         line-height: 17px;
         padding: 14px 82px; 

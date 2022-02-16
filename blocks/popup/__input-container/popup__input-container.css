@@ -1,5 +1,6 @@
 .popup__input-container {
     max-width: 358px;
+    min-width: 238px;
     display: flex;
     flex-direction: column;
     border: 0;
