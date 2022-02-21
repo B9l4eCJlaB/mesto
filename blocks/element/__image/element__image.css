@@ -6,15 +6,3 @@
     object-fit: cover;
     cursor: pointer;
 }
-
-@media screen and (max-width: 768px) {
-    .element__image {
-        height: auto;
-    }
-}
-
-@media screen and (max-width: 520px) {
-    .element__image {
-        height: 282px;
-    }
-}
