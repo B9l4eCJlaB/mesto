@@ -102,7 +102,7 @@ const handleProfileFormSubmit = (event) => {
     closePopup(editPopup);
 }
 
-const createImage = (event) => {
+const handleImageFormSubmit = (event) => {
     event.preventDefault();
     elements.prepend(renderCards(inputPlace.value, inputPhoto.value));
     addImageForm.reset();
@@ -119,7 +119,7 @@ const closePopupByClickOnOverlay = (event) => {
     }
 }
 
-addImageForm.addEventListener('submit', createImage);
+addImageForm.addEventListener('submit', handleImageFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 addButton.addEventListener('click', () => { openPopup(popupAdd); });
 editButton.addEventListener('click', openProfilePopup);
