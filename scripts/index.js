@@ -126,5 +126,5 @@ editButton.addEventListener('click', openProfilePopup);
 editPopup.addEventListener('click', closePopupByClickOnOverlay);
 closeButtons.forEach(elem => {
     elem.addEventListener('click',() => closePopup(elem.closest('.popup')));
-})
+});
 
