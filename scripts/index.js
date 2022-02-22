@@ -2,20 +2,20 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const authorName = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
-const editPopup = document.querySelector('.popup');
+const editPopup = document.querySelector('.popup-profile');
 const popupAdd = document.querySelector('.popup-add');
 const popupImage = document.querySelector('.popup-image');
 
-const closeButton = document.querySelectorAll('.popup__close');
-const formElem = editPopup.querySelector('.popup__form');
+const closeButtons = document.querySelectorAll('.popup__close');
+const profileForm = editPopup.querySelector('.profile-form');
 
-const addImageForm = popupAdd.querySelector('.popup__form');
+const addImageForm = popupAdd.querySelector('.add-form');
 
 const fullImage = document.querySelector('.popup-image__photo');
 const imageTitle = document.querySelector('.popup-image__title');
 
-const inputName = formElem.querySelector('.popup__input_name');
-const inputJob = formElem.querySelector('.popup__input_description');
+const inputName = profileForm.querySelector('.popup__input_name');
+const inputJob = profileForm.querySelector('.popup__input_description');
 const inputPlace = document.querySelector('.popup__input_place');
 const inputPhoto = document.querySelector('.popup__input_href');
 
@@ -50,7 +50,7 @@ const initialCards = [
     }
   ];
 
-const likeButton = event => {
+const toggleLikes = event => {
     event.target.classList.toggle('element__like_active');
 }
 const removeCard = card => {
@@ -59,18 +59,23 @@ const removeCard = card => {
 
 const openImageCard = (name, link) => {
     fullImage.src = link;
+    fullImage.alt = name;
     imageTitle.textContent = name;
     openPopup(popupImage);
 }
 
 const renderCards = (name, link) => {
     const templateItem = elementsTemplate.cloneNode(true);
-    templateItem.querySelector('.element__image').src = link;
-    templateItem.querySelector('.element__image').alt = name;
-    templateItem.querySelector('.element__name').textContent = name;
-    templateItem.querySelector('.element__like').addEventListener('click', likeButton);
-    templateItem.querySelector('.element__trash').addEventListener('click', removeCard);
-    templateItem.querySelector('.element__image').addEventListener('click', () => {openImageCard(name, link)});
+    const image = templateItem.querySelector('.element__image');
+    const title = templateItem.querySelector('.element__name');
+    const likeButton = templateItem.querySelector('.element__like');
+    const trashButton = templateItem.querySelector('.element__trash');
+    image.src = link;
+    image.alt = name;
+    title.textContent = name;
+    likeButton.addEventListener('click', toggleLikes);
+    trashButton.addEventListener('click', removeCard);
+    image.addEventListener('click', () => {openImageCard(name, link)});
     return templateItem;
 }
 
@@ -78,14 +83,12 @@ initialCards.forEach( elem => elements.append(renderCards(elem.name, elem.link))
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
-    inputPlace.value = '';
-    inputPhoto.value = '';
 }
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
 
 }
-const openEditButton = () => {
+const openProfilePopup = () => {
     openPopup(editPopup);
     inputName.value = authorName.textContent;
     inputJob.value = description.textContent;
@@ -102,7 +105,7 @@ const handleProfileFormSubmit = (event) => {
 const createImage = (event) => {
     event.preventDefault();
     elements.prepend(renderCards(inputPlace.value, inputPhoto.value));
-    
+    addImageForm.reset();
     closePopup(popupAdd);
 }
 
@@ -117,11 +120,11 @@ const closePopupByClickOnOverlay = (event) => {
 }
 
 addImageForm.addEventListener('submit', createImage);
-formElem.addEventListener('submit', handleProfileFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 addButton.addEventListener('click', () => { openPopup(popupAdd); });
-editButton.addEventListener('click', openEditButton);
+editButton.addEventListener('click', openProfilePopup);
 editPopup.addEventListener('click', closePopupByClickOnOverlay);
-closeButton.forEach(elem => {
+closeButtons.forEach(elem => {
     elem.addEventListener('click',() => closePopup(elem.closest('.popup')));
 })
 
