@@ -84,7 +84,8 @@ initialCards.forEach( elem => elements.append(renderCards(elem.name, elem.link))
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupByKeydown);
+    document.removeEventListener('keydown', closePopupByKeyEscape);
+    popup.removeEventListener('click', closePopupByClickOnOverlay);
 }
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
