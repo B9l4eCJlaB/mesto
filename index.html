@@ -38,11 +38,13 @@
     <section class="popup popup-profile">
         <div class="popup__main-container">
             <button class="popup__close"></button>
-            <form class="popup__form profile-form" name="form-profile" action="#">
+            <form class="popup__form profile-form" name="form-profile" novalidate action="#">
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <fieldset class="popup__input-container">
-                    <input class="popup__input popup__input_name" type="text" placeholder="Введите имя">
-                    <input class="popup__input popup__input_description" type="text" placeholder="Введите профессию">
+                    <input class="popup__input popup__input_name" id="input-name" type="text" required minlength="2" maxlength="40" placeholder="Введите имя">
+                    <span class="popup__error input-name-error"></span>
+                    <input class="popup__input popup__input_description" id="input-description" type="text" required minlength="2" maxlength="200" placeholder="О себе">
+                    <span class="popup__error input-description-error"></span>
                     <button class="popup__submit-button" type="submit">Сохранить</button>
                 </fieldset>
             </form>
@@ -51,11 +53,13 @@
     <section class="popup popup-add">
         <div class="popup__main-container">
             <button class="popup__close"></button>
-            <form class="popup__form add-form" name="form-add" action="#">
+            <form class="popup__form add-form" name="form-add" novalidate action="#">
                 <h2 class="popup__heading">Новое место</h2>
                 <fieldset class="popup__input-container">
-                    <input class="popup__input popup__input_place" type="text" placeholder="Название">
-                    <input class="popup__input popup__input_href" type="text" placeholder="Ссылка на картинку">
+                    <input class="popup__input popup__input_place" id="input-place" type="text" required minlength="2" maxlength="30" placeholder="Название">
+                    <span class="popup__error input-place-error"></span>
+                    <input class="popup__input popup__input_href" id="input-href" type="url" required placeholder="Ссылка на картинку">
+                    <span class="popup__error input-href-error"></span>
                     <button class="popup__submit-button" type="submit">Сохранить</button>
                 </fieldset>
             </form>
@@ -78,7 +82,7 @@
             </div>
         </article>
     </template>
-
+    <script src="scripts/validate.js"></script>
     <script src="scripts/index.js"></script>
 </body>
 
