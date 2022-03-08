@@ -1,5 +1,5 @@
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+const buttonEdit = document.querySelector('.profile__edit-button');
+const buttonAdd = document.querySelector('.profile__add-button');
 const authorName = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
 
@@ -91,12 +91,13 @@ const openPopup = (popup) => {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByKeyEscape);
     popup.addEventListener('click', closePopupByClickOnOverlay);
-
 }
+
 const openProfilePopup = () => {
-    openPopup(editPopup);
     inputName.value = authorName.textContent;
     inputJob.value = description.textContent;
+
+    openPopup(editPopup);
 }
 
 const handleProfileFormSubmit = (event) => {
@@ -110,8 +111,9 @@ const handleProfileFormSubmit = (event) => {
 const handleImageFormSubmit = (event) => {
     event.preventDefault();
     elements.prepend(renderCards(inputPlace.value, inputPhoto.value));
-    addImageForm.reset();
     closePopup(popupAdd);
+
+    addImageForm.reset();
 }
 
 
@@ -132,8 +134,8 @@ const closePopupByKeyEscape = (evt) => {
 
 addImageForm.addEventListener('submit', handleImageFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-addButton.addEventListener('click', () => { openPopup(popupAdd); });
-editButton.addEventListener('click', openProfilePopup);
+buttonAdd.addEventListener('click', () => { openPopup(popupAdd); });
+buttonEdit.addEventListener('click', openProfilePopup);
 closeButtons.forEach(elem => {
     elem.addEventListener('click',() => closePopup(elem.closest('.popup')));
 });

@@ -5,7 +5,7 @@
     margin-bottom: 30px;
     align-self: flex-start;
     visibility: hidden;
-    min-height: 20px;
+    height: 20px;
     opacity: 0;
     transition: visiability .3s linear opacity .3s linear;
 }
