@@ -2,7 +2,7 @@
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     align-self: flex-start;
     visibility: hidden;
     height: 20px;
@@ -10,5 +10,11 @@
     transition: visiability .3s linear opacity .3s linear;
 }
 .popup__error:last-of-type {
-    margin-bottom: 48px;
+    margin-bottom: 28px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__error:last-of-type {
+        margin-bottom: 25px;
+    }
 }

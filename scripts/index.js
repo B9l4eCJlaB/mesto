@@ -3,14 +3,14 @@ const buttonAdd = document.querySelector('.profile__add-button');
 const authorName = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
 
-const editPopup = document.querySelector('.popup-profile');
+const popupEdit = document.querySelector('.popup-profile');
 const popupAdd = document.querySelector('.popup-add');
 const popupImage = document.querySelector('.popup-image');
 
-const closeButtons = document.querySelectorAll('.popup__close');
-const profileForm = editPopup.querySelector('.profile-form');
+const buttonsClose = document.querySelectorAll('.popup__close');
+const profileForm = popupEdit.querySelector('.profile-form');
 
-const addImageForm = popupAdd.querySelector('.add-form');
+const imageFormAdd = popupAdd.querySelector('.add-form');
 
 const fullImage = document.querySelector('.popup-image__photo');
 const imageTitle = document.querySelector('.popup-image__title');
@@ -93,11 +93,23 @@ const openPopup = (popup) => {
     popup.addEventListener('click', closePopupByClickOnOverlay);
 }
 
+const checkingWhenOpeningPopup = (input) => {
+  const buttonElement = document.querySelector('.popup__submit-button');
+  if (!input.validity.valid) {
+    buttonElement.classList.add('popup__submit-button_disabled');
+    buttonElement.setAttribute('disabled', true);
+  } else {
+    buttonElement.classList.remove('popup__submit-button_disabled');
+    buttonElement.removeAttribute('disabled');
+  }
+}
+
 const openProfilePopup = () => {
     inputName.value = authorName.textContent;
     inputJob.value = description.textContent;
 
-    openPopup(editPopup);
+    checkingWhenOpeningPopup(inputName);
+    openPopup(popupEdit);
 }
 
 const handleProfileFormSubmit = (event) => {
@@ -105,7 +117,7 @@ const handleProfileFormSubmit = (event) => {
     authorName.textContent = inputName.value;
     description.textContent = inputJob.value;
 
-    closePopup(editPopup);
+    closePopup(popupEdit);
 }
 
 const handleImageFormSubmit = (event) => {
@@ -113,7 +125,7 @@ const handleImageFormSubmit = (event) => {
     elements.prepend(renderCards(inputPlace.value, inputPhoto.value));
     closePopup(popupAdd);
 
-    addImageForm.reset();
+    imageFormAdd.reset();
 }
 
 
@@ -132,10 +144,10 @@ const closePopupByKeyEscape = (evt) => {
   }
 }
 
-addImageForm.addEventListener('submit', handleImageFormSubmit);
+imageFormAdd.addEventListener('submit', handleImageFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 buttonAdd.addEventListener('click', () => { openPopup(popupAdd); });
 buttonEdit.addEventListener('click', openProfilePopup);
-closeButtons.forEach(elem => {
+buttonsClose.forEach(elem => {
     elem.addEventListener('click',() => closePopup(elem.closest('.popup')));
 });
