@@ -1,8 +1,8 @@
-import { openImageCard } from "./index.js";
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, openImage, cardSelector) {
         this._title = data.name;
         this._image = data.link;
+        this._openImage = openImage;
         this._cardSelector = cardSelector;
     }
     _getTemplate() {
@@ -20,6 +20,7 @@ class Card {
 
     _removeCard() {
         this._element.remove();
+        this._element = null;
     }
 
     _setEventListeners() {
@@ -30,7 +31,7 @@ class Card {
             this._removeCard()
         });
         this._elementImage.addEventListener('click', () => {
-            openImageCard(this._title, this._image);
+            this._openImage(this._title, this._image);
         })
     }
 

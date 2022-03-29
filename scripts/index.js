@@ -1,3 +1,4 @@
+import { initialCards } from "./initial-cards.js";
 import { Card } from "./Card.js";
 import { FormValidator, configElements } from "./FormValidator.js";
 
@@ -24,33 +25,6 @@ const inputPlace = document.querySelector('.popup__input_place');
 const inputPhoto = document.querySelector('.popup__input_href');
 
 const elements = document.querySelector('.elements');
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
@@ -112,7 +86,7 @@ const handleImageFormSubmit = (event) => {
 }
 
 const createCard = (data) => {
-  const card = new Card(data, '.template-elements');
+  const card = new Card(data, openImageCard, '.template-elements');
   return card.generateCard();
 }
 
@@ -143,4 +117,3 @@ buttonEdit.addEventListener('click', () => {
 buttonsClose.forEach(elem => {
     elem.addEventListener('click',() => closePopup(elem.closest('.popup')));
 });
-export { openImageCard }
