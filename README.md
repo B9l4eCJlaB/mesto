@@ -10,6 +10,7 @@
 * **Java-Script**
 * **Git**
 * **Nested__BEM**
+* **Webpack**
 
 ### Ссылка на проект: [Mesto](https://b9l4ecjlab.github.io/mesto/ "Вход на сайт Mesto")
 
