@@ -1,8 +1,9 @@
 import './index.css';
 
+import { configElements } from "../utils/constants.js"
 import { initialCards } from "../utils/initial-cards.js";
 import { Card } from "../components/Card.js";
-import { FormValidator, configElements } from "../components/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js";
 import  Section  from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -10,23 +11,23 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import {
   buttonEdit,
   buttonAdd,
-  authorName,
-  description,
+  authorNameSelector,
+  descriptionSelector,
+  inputName,
+  inputJob,
   popupEdit,
   popupAdd,
   popupImage,
   profileForm,
   imageFormAdd,
-  inputName,
-  inputJob,
   elements,
   cardSelector
 } from "../utils/constants.js"
 
 
 const userInfo = new UserInfo ({
-  nameSelector: authorName,
-  infoSelector: description,
+  nameSelector: authorNameSelector,
+  infoSelector: descriptionSelector,
 });
 
 const popupEditProfile = new PopupWithForm(popupEdit,
@@ -77,11 +78,12 @@ const createCard = (data) => {
   const newCard = card.generateCard();
   return newCard;
 }
-cardList.renderItems();
+
 
 popupEditProfile.setEventListeners();
 popupTypeImage.setEventListeners();
 popupAddPlace.setEventListeners();
+cardList.renderItems();
 
 const imageFormValidation = new FormValidator(configElements, imageFormAdd);
 imageFormValidation.enableValidation();
@@ -90,10 +92,10 @@ profileFormValidation.enableValidation();
 
 
 buttonAdd.addEventListener('click', () => {
-  openImageCard();
   imageFormValidation.resetValidationForm();
+  openImageCard();
 });
 buttonEdit.addEventListener('click', () => {
-  openProfilePopup();
   profileFormValidation.resetValidationForm();
+  openProfilePopup();
 });

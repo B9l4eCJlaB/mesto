@@ -1,19 +1,10 @@
-const configElements = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-}
-
 class FormValidator {
     constructor(configElements, form) {
         this._configElements = configElements;
         this._form = form;
         this._inputs = Array.from(this._form.querySelectorAll(this._configElements.inputSelector));
         this._button = this._form.querySelector(this._configElements.submitButtonSelector);
-        
+
     }
 
     _showInputError(inputElement, errorMessage) {
@@ -65,7 +56,7 @@ class FormValidator {
 
     _setEventListeners() {
         this.toggleButtonState();
-        
+
         this._inputs.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
@@ -83,4 +74,4 @@ class FormValidator {
 
 }
 
-export { FormValidator, configElements }
+export { FormValidator }
