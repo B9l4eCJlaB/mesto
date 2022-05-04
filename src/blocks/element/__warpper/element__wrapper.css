@@ -1,0 +1,6 @@
+.element__wrapper {
+    flex-direction: column;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
