@@ -1,4 +1,4 @@
-// import './index.css';
+import './index.css';
 
 import { configElements } from "../utils/constants.js"
 import { initialCards } from "../utils/initial-cards.js";
