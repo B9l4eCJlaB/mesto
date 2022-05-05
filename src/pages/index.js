@@ -1,7 +1,6 @@
 import './index.css';
 
 import { configElements } from "../utils/constants.js"
-import { initialCards } from "../utils/initial-cards.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import  Section  from "../components/Section.js";
@@ -39,18 +38,17 @@ const api = new Api({
 })
 
 const deletePopup = new PopupWithConfirm('.popup-delete');
-deletePopup.setEventListeners()
 
-const popupEditAvatar = new PopupWithForm(popupAvatar, newValues => {
+const popupEditAvatar = new PopupWithForm(popupAvatar, value => {
   popupEditAvatar.renderLoading(true)
-  api.handleAvatar(newValues)
+  api.handleAvatar(value)
     .then((data) => {
       userInfo.setUserAvatar(data)
       avatarFormValidation.toggleButtonState()
       popupEditAvatar.close()
     })
     .catch((err) => console.log(err))
-    .finally( _ => popupEditAvatar.renderLoading(false))
+    .finally( () => popupEditAvatar.renderLoading(false))
 })
 
 
@@ -60,30 +58,29 @@ const userInfo = new UserInfo ({
   avatarSelector: profileAvatar
 });
 
-const popupEditProfile = new PopupWithForm(popupEdit,
-  newValues => {
+const popupEditProfile = new PopupWithForm(popupEdit, value => {
     popupEditProfile.renderLoading(true)
-    api.setUserInfoApi(newValues)
+    api.setUserInfoApi(value)
       .then(data => {
         userInfo.setUserInfo(data)
         popupEditProfile.close()
       })
       .catch((err) => console.log(err))
-      .finally( _ => popupEditProfile.renderLoading(false))
+      .finally( () => popupEditProfile.renderLoading(false))
   }
 )
 
 const popupTypeImage = new PopupWithImage(popupImage);
 
-const popupAddPlace = new PopupWithForm(popupAdd, newValue => {
+const popupAddPlace = new PopupWithForm(popupAdd, value => {
   popupAddPlace.renderLoading(true)
-  api.addUserCard(newValue)
+  api.addUserCard(value)
     .then(data => {
       cardList.addItem(createCard(data))
       popupAddPlace.close()
     })
     .catch((err) => console.log(err))
-    .finally( _ => popupAddPlace.renderLoading(true))
+    .finally( () => popupAddPlace.renderLoading(true))
 }
 )
 const openProfilePopup = () => {
@@ -109,16 +106,16 @@ const createCard = (data) => {
       data: data,
       handleCardClick: () => popupTypeImage.open(data),
       handleLikeClick: () => card.handleLikeCard(),
-      handleDeleteClick: _ => {
-        deletePopup.setHandleSubmit( _ => {
+      handleDeleteClick: () => {
+        deletePopup.setHandleSubmit( () => {
           deletePopup.renderWhileLoading(true)
           api.delete(data._id)
-            .then( _ => {
+            .then( () => {
               card._removeCard()
               deletePopup.close()
             })
             .catch(err => console.log(err))
-            .finally(_ => deletePopup.renderWhileLoading(false))
+            .finally( () => deletePopup.renderWhileLoading(false))
         })
         deletePopup.open()
       }
@@ -136,7 +133,9 @@ popupEditProfile.setEventListeners();
 popupTypeImage.setEventListeners();
 popupAddPlace.setEventListeners();
 popupEditAvatar.setEventListeners();
+deletePopup.setEventListeners();
 
+let userId;
 
 const imageFormValidation = new FormValidator(configElements, imageFormAdd);
 imageFormValidation.enableValidation();
@@ -159,9 +158,8 @@ checkAvatar.addEventListener('click', () => {
   popupEditAvatar.open();
 })
 
-let userId
 
-api.getAllData() 
+api.getAllData()
   .then(( [cards, data] ) => {
     console.log(data)
     console.log(cards)

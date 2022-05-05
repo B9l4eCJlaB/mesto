@@ -57,34 +57,30 @@ class Card {
         this._elementImage.alt = this._title;
         this._elementTitle.textContent = this._title;
         this._elementLikesCount.textContent = this._likes.length;
-        if(!(this._ownerId === this._userId)) {
-            this._element.querySelector('.element__trash').style.display = 'none'
-          }
-          
-          if(this._likes.find((obj) => this._userId === obj._id)) {
-            this._element.querySelector('.element__like').classList.add('element__like_active')
+        if(!(this._ownerId === this._userId)) this._elementTrashButton.style.display = 'none';
+
+          if(this._likes.find(obj => this._userId === obj._id)) {
+            this._elementLikeButton.classList.add('element__like_active')
           }
 
         return this._element;
     }
     handleLikeCard() {
-        const likeButton = this._element.querySelector('.element__like');
-        const countLikes = this._element.querySelector('.element__count');
-        if(!likeButton.classList.contains('element__like_active')) {
+        if(!this._elementLikeButton.classList.contains('element__like_active')) {
             this._api.like(this._id)
                 .then(data => {
-                    likeButton.classList.add('element__like_active');
-                    countLikes.textContent = data.likes.length;
+                    this._elementLikeButton.classList.add('element__like_active');
+                    this._elementLikesCount.textContent = data.likes.length;
                 })
                 .catch(err => {
                     console.log(err)
-                })    
+                })
         }
         else {
             this._api.dislike(this._id)
                 .then(data => {
-                    likeButton.classList.remove('element__like_active');
-                    countLikes.textContent = data.likes.length;
+                    this._elementLikeButton.classList.remove('element__like_active');
+                    this._elementLikesCount.textContent = data.likes.length;
                 })
                 .catch(err => {
                     console.log(err)

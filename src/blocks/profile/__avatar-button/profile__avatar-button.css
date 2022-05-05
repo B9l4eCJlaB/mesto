@@ -18,3 +18,15 @@
     background-repeat: no-repeat;
     background-size: 26px;
 }
+@media screen and (max-width: 560px) {
+    .profile__avatar-button {
+        bottom: 132px;
+        left: 96px;
+    }
+}
+@media screen and (max-width: 420px) {
+    .profile__avatar-button {
+        bottom: 104px;
+        left: 44px;
+    }
+}
