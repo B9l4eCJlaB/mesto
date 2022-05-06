@@ -24,7 +24,7 @@ class Card {
         return cardElement
     }
 
-    _removeCard() {
+    removeCard() {
         this._element.remove();
         this._element = null;
     }

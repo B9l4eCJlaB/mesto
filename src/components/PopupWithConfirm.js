@@ -17,10 +17,10 @@ export default class PopupWithConfirm extends Popup {
     }
     renderWhileLoading(isLoading) {
         if(isLoading) {
-            this._popupButton.textContent = 'Сохранение...'
+            this._popupButton.textContent = 'Удаление...'
         }
         else {
-            this._popupButton.textContent = 'Сохранить'
+            this._popupButton.textContent = 'Да'
         }
     }
 }

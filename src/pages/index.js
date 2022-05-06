@@ -43,9 +43,8 @@ const popupEditAvatar = new PopupWithForm(popupAvatar, value => {
   popupEditAvatar.renderLoading(true)
   api.handleAvatar(value)
     .then((data) => {
-      userInfo.setUserAvatar(data)
-      avatarFormValidation.toggleButtonState()
-      popupEditAvatar.close()
+      userInfo.setUserAvatar(data);
+      popupEditAvatar.close();
     })
     .catch((err) => console.log(err))
     .finally( () => popupEditAvatar.renderLoading(false))
@@ -62,8 +61,8 @@ const popupEditProfile = new PopupWithForm(popupEdit, value => {
     popupEditProfile.renderLoading(true)
     api.setUserInfoApi(value)
       .then(data => {
-        userInfo.setUserInfo(data)
-        popupEditProfile.close()
+        userInfo.setUserInfo(data);
+        popupEditProfile.close();
       })
       .catch((err) => console.log(err))
       .finally( () => popupEditProfile.renderLoading(false))
@@ -76,11 +75,11 @@ const popupAddPlace = new PopupWithForm(popupAdd, value => {
   popupAddPlace.renderLoading(true)
   api.addUserCard(value)
     .then(data => {
-      cardList.addItem(createCard(data))
-      popupAddPlace.close()
+      cardList.addItem(createCard(data));
+      popupAddPlace.close();
     })
     .catch((err) => console.log(err))
-    .finally( () => popupAddPlace.renderLoading(true))
+    .finally( () => popupAddPlace.renderLoading(false))
 }
 )
 const openProfilePopup = () => {
@@ -111,7 +110,7 @@ const createCard = (data) => {
           deletePopup.renderWhileLoading(true)
           api.delete(data._id)
             .then( () => {
-              card._removeCard()
+              card.removeCard()
               deletePopup.close()
             })
             .catch(err => console.log(err))
@@ -137,24 +136,32 @@ deletePopup.setEventListeners();
 
 let userId;
 
-const imageFormValidation = new FormValidator(configElements, imageFormAdd);
-imageFormValidation.enableValidation();
-const profileFormValidation = new FormValidator(configElements, profileForm);
-profileFormValidation.enableValidation();
-const avatarFormValidation = new FormValidator(configElements, avatarForm);
-avatarFormValidation.enableValidation()
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach(formElement => {
+      const validator = new FormValidator(config, formElement);
+      const formName = formElement.getAttribute('name');
+      formValidators[formName] = validator;
+      validator.enableValidation();
+    })
+}
+
+
+enableValidation(configElements);
 
 
 buttonAdd.addEventListener('click', () => {
-  imageFormValidation.resetValidationForm();
+  formValidators['form-profile'].resetValidationForm();
   openImageCard();
 });
 buttonEdit.addEventListener('click', () => {
-  profileFormValidation.resetValidationForm();
+  formValidators['form-profile'].resetValidationForm();
   openProfilePopup();
 });
 checkAvatar.addEventListener('click', () => {
-  avatarFormValidation.resetValidationForm();
+  formValidators['avatar'].resetValidationForm();
   popupEditAvatar.open();
 })
 
