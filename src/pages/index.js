@@ -17,14 +17,11 @@ import {
   popupEdit,
   popupAdd,
   popupImage,
-  profileForm,
-  imageFormAdd,
   elements,
   cardSelector,
   profileAvatar,
   popupAvatar,
-  checkAvatar,
-  avatarForm,
+  checkAvatar
 } from "../utils/constants.js";
 import Api from '../components/Api.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
